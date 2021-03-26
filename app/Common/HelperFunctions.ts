@@ -20,9 +20,15 @@ export async function getMenu(
 ): Promise<Menu> {
   if (!hasWeekImage(date) || !cache) {
     if (!allowFetch)
-      throw new Exception(
-        "Du får inte hämta menyer som inte är cachade. Kontakta server administratören om du tror något har gått fel."
-      );
+      if (!hasWeekImage(date)) {
+        throw new Exception(
+          "Veckans meny finns inte. Kontakta server administratören om du tror något har gått fel."
+        );
+      }else{
+        throw new Exception(
+          "Du får inte hämta menyer som inte är cachade. Kontakta server administratören om du tror något har gått fel."
+        );
+      }
     const imageURL = await image(null, null);
     await fetch(date, imageURL, !cache);
   }
