@@ -41,7 +41,8 @@ export const sweDayCast: { [key: string]: string } = {
   lordag: "saturday",
   söndag: "sunday",
   sondag: "sunday",
-  andra: "other"
+  andra: "other",
+  langfredag: "good_friday",
 };
 
 export const engDayCast: { [key: string]: string } = {
@@ -52,5 +53,6 @@ export const engDayCast: { [key: string]: string } = {
   friday: "fredag",
   saturday: "lördag",
   sunday: "söndag",
-  other: "andra rätter"
+  other: "andra rätter",
+  langfredag: "långfredag"
 };

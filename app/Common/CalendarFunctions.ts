@@ -67,8 +67,8 @@ export async function generateCalendar(): Promise<string> {
           if (!listedWeeks[`${json.listed_week}-${json.actual_year}`]) {
             await Object.keys(json.menu).forEach((key:string) => {
               let day =
-                engDayCast[key].charAt(0).toUpperCase() +
-                engDayCast[key].slice(1) ||
+                (engDayCast[key] || key).charAt(0).toUpperCase() +
+                (engDayCast[key] || key).slice(1) ||
                 key.charAt(0).toUpperCase() + key.slice(1);
               let momentDay = moment(
                 `${key}-${json.listed_week}-${json.actual_year}`,
