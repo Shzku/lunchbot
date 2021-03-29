@@ -7,7 +7,7 @@ export async function isWeekUpdated(date: Moment): Promise<boolean> {
   let rawData:Buffer;
   try {
     rawData = await fsA.readFile(
-      `../tmp/eatery-${date.format("YYYY-WW")}.json`
+      `./tmp/eatery-${date.format("YYYY-WW")}.json`
     );
   } catch {
     return true;
@@ -17,35 +17,35 @@ export async function isWeekUpdated(date: Moment): Promise<boolean> {
 }
 
 export function hasWeekImage(date: Moment): boolean {
-  return fs.existsSync(`../tmp/eatery-${date.format("YYYY-WW")}.tif`);
+  return fs.existsSync(`./tmp/eatery-${date.format("YYYY-WW")}.tif`);
 }
 
 export function hasWeekSourceImage(date: Moment): boolean {
-  return fs.existsSync(`../tmp/eatery-${date.format("YYYY-WW")}.source`);
+  return fs.existsSync(`./tmp/eatery-${date.format("YYYY-WW")}.source`);
 }
 
 export function isWeekStringified(date: Moment): boolean {
-  return fs.existsSync(`../tmp/eatery-${date.format("YYYY-WW")}.txt`);
+  return fs.existsSync(`./tmp/eatery-${date.format("YYYY-WW")}.txt`);
 }
 
 export function isWeekParsed(date: Moment): boolean {
-  return fs.existsSync(`../tmp/eatery-${date.format("YYYY-WW")}.json`);
+  return fs.existsSync(`./tmp/eatery-${date.format("YYYY-WW")}.json`);
 }
 
 export function deleteWeekImage(date: Moment): void {
-  fs.unlinkSync(`../tmp/eatery-${date.format("YYYY-WW")}.tif`);
+  fs.unlinkSync(`./tmp/eatery-${date.format("YYYY-WW")}.tif`);
 }
 
 export function deleteWeekSourceImage(date: Moment): void {
-  fs.unlinkSync(`../tmp/eatery-${date.format("YYYY-WW")}.source`);
+  fs.unlinkSync(`./tmp/eatery-${date.format("YYYY-WW")}.source`);
 }
 
 export function deleteWeekStringified(date: Moment): void {
-  fs.unlinkSync(`../tmp/eatery-${date.format("YYYY-WW")}.txt`);
+  fs.unlinkSync(`./tmp/eatery-${date.format("YYYY-WW")}.txt`);
 }
 
 export function deleteWeekParsed(date: Moment): void {
-  fs.unlinkSync(`../tmp/eatery-${date.format("YYYY-WW")}.json`);
+  fs.unlinkSync(`./tmp/eatery-${date.format("YYYY-WW")}.json`);
 }
 
 export function deleteWeek(date: Moment): void {

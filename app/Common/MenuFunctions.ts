@@ -38,8 +38,8 @@ export async function fetch(
   temp: boolean
 ): Promise<boolean> {
   const filePath = temp
-    ? "../tmp/eatery.tif.tmp"
-    : `../tmp/eatery-${date.format("YYYY-WW")}.tif`;
+    ? "./tmp/eatery.tif.tmp"
+    : `./tmp/eatery-${date.format("YYYY-WW")}.tif`;
 
   if (!fs.existsSync(filePath) || temp) {
     const sharpStream = sharp();

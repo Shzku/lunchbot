@@ -3,7 +3,7 @@ const path = require("path");
 const sharp = require("sharp");
 const fs = require("fs/promises");
 
-glob(path.join(__dirname, "../tmp/*.png"), {}, async (_err, files) => {
+glob(path.join(__dirname, "./tmp/*.png"), {}, async (_err, files) => {
   for (const path1 of files) {
     console.log("converting " + path1);
     let sharpStream = sharp(path1);

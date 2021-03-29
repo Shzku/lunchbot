@@ -5,14 +5,12 @@
  * file.
  */
 
-import proxyAddr from "proxy-addr";
-import Env from "@ioc:Adonis/Core/Env";
-import { LoggerConfig } from "@ioc:Adonis/Core/Logger";
-import { RequestConfig } from "@ioc:Adonis/Core/Request";
-import { ResponseConfig } from "@ioc:Adonis/Core/Response";
-import { ProfilerConfig } from "@ioc:Adonis/Core/Profiler";
-
-type HttpConfig = RequestConfig & ResponseConfig;
+import proxyAddr from 'proxy-addr'
+import Env from '@ioc:Adonis/Core/Env'
+import { ServerConfig } from '@ioc:Adonis/Core/Server'
+import { LoggerConfig } from '@ioc:Adonis/Core/Logger'
+import { ProfilerConfig } from '@ioc:Adonis/Core/Profiler'
+import { ValidatorConfig } from '@ioc:Adonis/Core/Validator'
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +25,7 @@ type HttpConfig = RequestConfig & ResponseConfig;
 | be decrypted.
 |
 */
-export const appKey: string = Env.getOrFail("APP_KEY") as string;
+export const appKey: string = Env.get('APP_KEY')
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +36,7 @@ export const appKey: string = Env.getOrFail("APP_KEY") as string;
 | the config properties to make keep server secure.
 |
 */
-export const http: HttpConfig = {
+export const http: ServerConfig = {
   /*
   |--------------------------------------------------------------------------
   | Allow method spoofing
@@ -79,7 +77,7 @@ export const http: HttpConfig = {
   | headers.
   |
   */
-  trustProxy: proxyAddr.compile("loopback"),
+  trustProxy: proxyAddr.compile('loopback'),
 
   /*
   |--------------------------------------------------------------------------
@@ -96,7 +94,7 @@ export const http: HttpConfig = {
   | JSONP Callback
   |--------------------------------------------------------------------------
   */
-  jsonpCallbackName: "callback",
+  jsonpCallbackName: 'callback',
 
   /*
   |--------------------------------------------------------------------------
@@ -104,9 +102,9 @@ export const http: HttpConfig = {
   |--------------------------------------------------------------------------
   */
   cookie: {
-    domain: "",
-    path: "/",
-    maxAge: "2h",
+    domain: '',
+    path: '/',
+    maxAge: '2h',
     httpOnly: true,
     secure: false,
     sameSite: false,
@@ -129,7 +127,7 @@ export const http: HttpConfig = {
   |
   */
   forceContentNegotiationToJSON: false,
-};
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -149,7 +147,7 @@ export const logger: LoggerConfig = {
   | reading the `name` property from the `package.json` file.
   |
   */
-  name: Env.get("APP_NAME") as string,
+  name: Env.get('APP_NAME'),
 
   /*
   |--------------------------------------------------------------------------
@@ -171,7 +169,7 @@ export const logger: LoggerConfig = {
   | at deployment level and not code level.
   |
   */
-  level: Env.get("LOG_LEVEL", "info") as string,
+  level: Env.get('LOG_LEVEL', 'info'),
 
   /*
   |--------------------------------------------------------------------------
@@ -182,8 +180,8 @@ export const logger: LoggerConfig = {
   | can have huge impact on performance.
   |
   */
-  prettyPrint: Env.get("NODE_ENV") === "development",
-};
+  prettyPrint: Env.get('NODE_ENV') === 'development',
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -222,4 +220,16 @@ export const profiler: ProfilerConfig = {
   |
   */
   whitelist: [],
-};
+}
+
+/*
+|--------------------------------------------------------------------------
+| Validator
+|--------------------------------------------------------------------------
+|
+| Configure the global configuration for the validator. Here's the reference
+| to the default config https://git.io/JT0WE
+|
+*/
+export const validator: ValidatorConfig = {
+}

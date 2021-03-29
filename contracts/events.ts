@@ -5,7 +5,7 @@
  * file.
  */
 
-declare module "@ioc:Adonis/Core/Event" {
+declare module '@ioc:Adonis/Core/Event' {
   /*
   |--------------------------------------------------------------------------
   | Define typed events
@@ -25,5 +25,6 @@ declare module "@ioc:Adonis/Core/Event" {
   | an instance of the the UserModel only.
   |
   */
-  interface EventsList {}
+  interface EventsList {
+  }
 }

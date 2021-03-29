@@ -44,12 +44,12 @@ export default class ApiController {
 
     if (await hasWeekImage(date)) {
       const file = await FileType.fromFile(
-        `../tmp/eatery-${date.format("YYYY-WW")}.source`
+        `./tmp/eatery-${date.format("YYYY-WW")}.source`
       );
       if (file) {
         if ("ext" in file) {
           response.attachment(
-            `../tmp/eatery-${date.format("YYYY-WW")}.source`,
+            `./tmp/eatery-${date.format("YYYY-WW")}.source`,
             "image." + file.ext
           );
         }
@@ -68,7 +68,7 @@ export default class ApiController {
 
     if (await hasWeekImage(date)) {
       response.attachment(
-        `../tmp/eatery-${date.format("YYYY-WW")}.tif`,
+        `./tmp/eatery-${date.format("YYYY-WW")}.tif`,
         "image.tif"
       );
       return "Downloading file...";
@@ -179,7 +179,7 @@ export default class ApiController {
     }
 
     if (await isWeekStringified(date)) {
-      response.download(`../tmp/eatery-${date.format("YYYY-WW")}.txt`);
+      response.download(`./tmp/eatery-${date.format("YYYY-WW")}.txt`);
       return "Downloading file...";
     }
 

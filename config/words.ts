@@ -54,5 +54,5 @@ export const engDayCast: { [key: string]: string } = {
   saturday: "lördag",
   sunday: "söndag",
   other: "andra rätter",
-  langfredag: "långfredag"
+  good_friday: "långfredag"
 };

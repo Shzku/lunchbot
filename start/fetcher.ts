@@ -7,7 +7,7 @@ import { deleteCalendar, generateCalendar } from "App/Common/CalendarFunctions";
 import * as fs from "fs/promises";
 import Event from "@ioc:Adonis/Core/Event";
 
-const ls = spawn("node", ["../start/cron.js"]);
+const ls = spawn("node", ["./start/cron.js"]);
 
 ls.stdout.on("data", async (stdout) => {
   let type = stdout.toString().replace(/(\r\n|\n|\r)/gm, "");
@@ -36,7 +36,7 @@ ls.stdout.on("data", async (stdout) => {
       );
       await getMenu(date, true, true);
       const calendar = await generateCalendar();
-      await fs.writeFile("../tmp/eatery-calendar.ical", calendar);
+      await fs.writeFile("./tmp/eatery-calendar.ical", calendar);
       await Event.emit("new:menu", { data, date });
     } else {
       const menu = await getMenu(date, false, true);
@@ -56,7 +56,7 @@ ls.stdout.on("data", async (stdout) => {
         await getMenu(date, true, true);
         deleteCalendar();
         const calendar = await generateCalendar();
-        await fs.writeFile("../tmp/eatery-calendar.ical", calendar);
+        await fs.writeFile("./tmp/eatery-calendar.ical", calendar);
         await Event.emit("new:menu", { data, date });
       }
     }

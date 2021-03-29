@@ -91,7 +91,7 @@ export default class WebController {
 
   public async regenerate_calendar() {
     const calendar = await generateCalendar();
-    await fs.writeFile("../tmp/eatery-calendar.ical", calendar);
+    await fs.writeFile("./tmp/eatery-calendar.ical", calendar);
     return calendar;
   }
 

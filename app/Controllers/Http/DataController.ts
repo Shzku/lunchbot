@@ -10,7 +10,7 @@ export default class DataController {
   public async menus_available() {
     const data:any = await new Promise( (resolve) => {
       glob(
-        path.join(__dirname, "../../../../tmp/*.source"),
+        path.join(__dirname, "../../.././tmp/*.source"),
         {},
         async (_err, files) => {
           resolve(files);
@@ -73,7 +73,7 @@ export default class DataController {
   public async statistics() {
     const json_files = await new Promise( (resolve) => {
       glob(
-        path.join(__dirname, "../../../../tmp/*.json"),
+        path.join(__dirname, "../../.././tmp/*.json"),
         {},
         async (_err, files) => {
           resolve(files.length)
@@ -82,7 +82,7 @@ export default class DataController {
     });
     const text_files = await new Promise( (resolve) => {
       glob(
-        path.join(__dirname, "../../../../tmp/*.txt"),
+        path.join(__dirname, "../../.././tmp/*.txt"),
         {},
         async (_err, files) => {
           resolve(files.length)
@@ -91,7 +91,7 @@ export default class DataController {
     });
     const source_images = await new Promise( (resolve) => {
       glob(
-        path.join(__dirname, "../../../../tmp/*.source"),
+        path.join(__dirname, "../../.././tmp/*.source"),
         {},
         async (_err, files) => {
           resolve(files.length)
@@ -100,7 +100,7 @@ export default class DataController {
     });
     const ocr_images = await new Promise( (resolve) => {
       glob(
-        path.join(__dirname, "../../../../tmp/*.json"),
+        path.join(__dirname, "../../.././tmp/*.json"),
         {},
         async (_err, files) => {
           resolve(files.length)

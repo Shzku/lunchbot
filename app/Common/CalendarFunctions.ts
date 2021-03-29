@@ -30,7 +30,7 @@ export function errorCalendar() {
 }
 
 export function calendarExists(): boolean {
-  if (fsS.existsSync(`../tmp/eatery-calendar.ical`)) {
+  if (fsS.existsSync(`./tmp/eatery-calendar.ical`)) {
     return true;
   }
   return false;
@@ -38,7 +38,7 @@ export function calendarExists(): boolean {
 
 export async function getCalendar() {
   if (calendarExists()) {
-    const cal = await fs.readFile(`../tmp/eatery-calendar.ical`);
+    const cal = await fs.readFile(`./tmp/eatery-calendar.ical`);
     return cal.toString();
   }
   return errorCalendar();
@@ -57,7 +57,7 @@ export async function generateCalendar(): Promise<string> {
 
   return new Promise((resolve) => {
     glob(
-      path.join(__dirname, "../../../tmp/*.json"),
+      path.join(__dirname, "../.././tmp/*.json"),
       {},
       async (_err, files) => {
         for (const path1 of files) {
@@ -99,6 +99,6 @@ export async function generateCalendar(): Promise<string> {
 }
 
 export function deleteCalendar(): void {
-  if (fsS.existsSync(`../tmp/eatery-calendar.ical`))
-  fsS.unlinkSync(`../tmp/eatery-calendar.ical`);
+  if (fsS.existsSync(`./tmp/eatery-calendar.ical`))
+  fsS.unlinkSync(`./tmp/eatery-calendar.ical`);
 }

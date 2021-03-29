@@ -36,18 +36,18 @@ export async function getMenu(
   if (!isWeekStringified(date) || !cache) {
     menuString = await ocr(
       !cache
-        ? "../tmp/eatery.tif.tmp"
-        : `../tmp/eatery-${date.format("YYYY-WW")}.tif`
+        ? "./tmp/eatery.tif.tmp"
+        : `./tmp/eatery-${date.format("YYYY-WW")}.tif`
     );
     await fs.writeFile(
       !cache
-        ? "../tmp/eatery.txt.tmp"
-        : `../tmp/eatery-${date.format("YYYY-WW")}.txt`,
+        ? "./tmp/eatery.txt.tmp"
+        : `./tmp/eatery-${date.format("YYYY-WW")}.txt`,
       menuString
     );
   } else {
     let cacheString = await fs.readFile(
-      `../tmp/eatery-${date.format("YYYY-WW")}.txt`
+      `./tmp/eatery-${date.format("YYYY-WW")}.txt`
     );
     menuString = cacheString.toString();
   }
@@ -68,8 +68,8 @@ export async function getMenu(
       );
     await fs.writeFile(
       !cache
-        ? "../tmp/eatery.json.tmp"
-        : `../tmp/eatery-${date.format("YYYY-WW")}.json`,
+        ? "./tmp/eatery.json.tmp"
+        : `./tmp/eatery-${date.format("YYYY-WW")}.json`,
       JSON.stringify(menuObject)
     );
     if (!weekUpdated && cache) {
@@ -78,13 +78,13 @@ export async function getMenu(
       Logger.warn(`Generating updated calendar.`)
       deleteCalendar();
       const calendar = await generateCalendar();
-      await fs.writeFile("../tmp/eatery-calendar.ical", calendar);
+      await fs.writeFile("./tmp/eatery-calendar.ical", calendar);
     }
   } else {
     const menuText = await fs.readFile(
       !cache
-        ? "../tmp/eatery.json.tmp"
-        : `../tmp/eatery-${date.format("YYYY-WW")}.json`
+        ? "./tmp/eatery.json.tmp"
+        : `./tmp/eatery-${date.format("YYYY-WW")}.json`
     );
     menuObject = JSON.parse(menuText.toString());
   }

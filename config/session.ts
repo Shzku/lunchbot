@@ -5,8 +5,8 @@
  * file.
  */
 
-import Env from "@ioc:Adonis/Core/Env";
-import { SessionConfig } from "@ioc:Adonis/Addons/Session";
+import Env from '@ioc:Adonis/Core/Env'
+import { SessionConfig } from '@ioc:Adonis/Addons/Session'
 
 const sessionConfig: SessionConfig = {
   /*
@@ -24,7 +24,7 @@ const sessionConfig: SessionConfig = {
   | Note: Switching drivers will make existing sessions invalid.
   |
   */
-  driver: Env.get("SESSION_DRIVER", "cookie") as string,
+  driver: Env.get('SESSION_DRIVER'),
 
   /*
   |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ const sessionConfig: SessionConfig = {
   | The name of the cookie that will hold the session id.
   |
   */
-  cookieName: "adonis-session",
+  cookieName: 'adonis-session',
 
   /*
   |--------------------------------------------------------------------------
@@ -61,7 +61,7 @@ const sessionConfig: SessionConfig = {
   | Example: `2 days`, `2.5 hrs`, `1y`, `5s` and so on.
   |
   */
-  age: "2h",
+  age: '2h',
 
   /*
   |--------------------------------------------------------------------------
@@ -73,14 +73,14 @@ const sessionConfig: SessionConfig = {
   |
   */
   cookie: {
-    path: "/",
+    path: '/',
     httpOnly: true,
     sameSite: false,
   },
 
   /*
   |--------------------------------------------------------------------------
-  | Configuration for file driver
+  | Configuration for the file driver
   |--------------------------------------------------------------------------
   |
   | The file driver needs absolute path to the directory in which sessions
@@ -88,7 +88,7 @@ const sessionConfig: SessionConfig = {
   |
   */
   file: {
-    location: "",
+    location: '',
   },
 
   /*
@@ -97,10 +97,10 @@ const sessionConfig: SessionConfig = {
   |--------------------------------------------------------------------------
   |
   | The redis connection you want session driver to use. The same connection
-  | must be defined inside `config/redis.ts` file
+  | must be defined inside `config/redis.ts` file as well.
   |
   */
-  redisConnection: "session",
-};
+  redisConnection: 'local',
+}
 
-export default sessionConfig;
+export default sessionConfig
