@@ -7,6 +7,7 @@ import sharp from "sharp";
 import got from "got";
 import { schemaVersion } from "../../config/schema";
 import Menu from "App/Types/Menu";
+import jimp from "jimp";
 const strtr = require("locutus/php/strings/strtr");
 const tesseract = require("node-tesseract-ocr");
 
@@ -46,14 +47,30 @@ export async function fetch(
 
     await got.stream(url).pipe(sharpStream);
 
-    const contrast = 5;
+    const contrast = 4;
     const brightness = 1;
 
     await sharpStream.toFile(filePath.replace(".tif", ".source"));
-    await sharpStream.linear(contrast, -(128 * contrast) + 128);
-    await sharpStream.modulate({ brightness: brightness });
+    const image = await jimp.read(filePath.replace(".tif", ".source"));
 
-    await sharpStream.clone().tiff().toFile(filePath);
+    image.scan(0, 0, image.bitmap.width, image.bitmap.height, (x, y, idx) => {
+      if (image.bitmap.data[idx] >= 2) {
+        image.bitmap.data[idx] = 200;
+        image.bitmap.data[idx + 1] = 200;
+        image.bitmap.data[idx + 2] = 200;
+        image.bitmap.data[idx + 3] = image.bitmap.data[idx + 3];
+      }
+    });
+
+    image.write(filePath.replace(".tif", ".filter.tif"));
+
+    const sharpBuffer = await image.getBufferAsync("image/tiff");
+    const sharpStream2 = await sharp(sharpBuffer);
+
+    await sharpStream2.linear(contrast, -(128 * contrast) + 128);
+    await sharpStream2.modulate({ brightness: brightness });
+
+    await sharpStream2.toFile(filePath);
 
     return true;
   } else {

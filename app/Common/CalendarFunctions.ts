@@ -6,6 +6,7 @@ import fsS from "fs";
 import { glob } from "glob";
 import path from "path";
 import {fileToDateString, getMenu} from "App/Common/HelperFunctions";
+import e from "express";
 
 export function errorCalendar() {
   const cal = ical({ domain: "eatery.nero2k.com", name: "Eatery Lunchmeny" });
@@ -62,35 +63,37 @@ export async function generateCalendar(): Promise<string> {
       async (_err, files) => {
         for (const path1 of files) {
           const fileDate = moment(fileToDateString(path1), "YYYY-WW")
-          const json = await getMenu(fileDate, false, true);
+          try {
+            const json = await getMenu(fileDate, false, true);
 
-          if (!listedWeeks[`${json.listed_week}-${json.actual_year}`]) {
-            await Object.keys(json.menu).forEach((key:string) => {
-              let day =
-                (engDayCast[key] || key).charAt(0).toUpperCase() +
-                (engDayCast[key] || key).slice(1) ||
-                key.charAt(0).toUpperCase() + key.slice(1);
-              let momentDay = moment(
-                `${key}-${json.listed_week}-${json.actual_year}`,
-                "dddd-ww-yyyy"
-              );
-              if (momentDay.isValid()) {
-                cal.createEvent({
-                  start: momentDay.startOf("day"),
-                  end: momentDay.endOf("day"),
-                  allDay: true,
-                  summary: `Eatery ${day}`,
-                  location: `EATERY KISTA NOD — MENY VECKA ${json.listed_week}`,
+            if (!listedWeeks[`${json.listed_week}-${json.actual_year}`]) {
+              await Object.keys(json.menu).forEach((key: string) => {
+                let day =
+                  (engDayCast[key] || key).charAt(0).toUpperCase() +
+                  (engDayCast[key] || key).slice(1) ||
+                  key.charAt(0).toUpperCase() + key.slice(1);
+                let momentDay = moment(
+                  `${key}-${json.listed_week}-${json.actual_year}`,
+                  "dddd-ww-yyyy"
+                );
+                if (momentDay.isValid()) {
+                  cal.createEvent({
+                    start: momentDay.startOf("day"),
+                    end: momentDay.endOf("day"),
+                    allDay: true,
+                    summary: `Eatery ${day}`,
+                    location: `EATERY KISTA NOD — MENY VECKA ${json.listed_week}`,
 
-                  description: json.menu[key].join("\n")+(json.menu["other"] ? "\n\n"+json.menu["other"].join("\n") : ""),
-                  url: `https://eatery.nero2k.com?date=${momentDay.format(
-                    "WW"
-                  )}-${momentDay.year()}&format=WW-YYYY`,
-                });
-                listedWeeks[`${json.listed_week}-${json.actual_year}`] = true;
-              }
-            });
-          }
+                    description: json.menu[key].join("\n") + (json.menu["other"] ? "\n\n" + json.menu["other"].join("\n") : ""),
+                    url: `https://eatery.nero2k.com?date=${momentDay.format(
+                      "WW"
+                    )}-${momentDay.year()}&format=WW-YYYY`,
+                  });
+                  listedWeeks[`${json.listed_week}-${json.actual_year}`] = true;
+                }
+              });
+            }
+          }catch(e){console.log(e)}
         }
         resolve(cal.toString());
       }
