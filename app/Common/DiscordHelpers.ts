@@ -25,7 +25,7 @@ export function embed(data: Menu, date: Moment) {
 
   Object.keys(data.menu).forEach((value) => {
     const day = engDayCast[value] || value;
-    embed.addField(day.toUpperCase(), data.menu[value].join("\n"));
+    embed.addField(day.toUpperCase(), data.menu[value].length > 0 ? data.menu[value].join("\n") : " ");
   });
 
   return embed;
