@@ -73,7 +73,7 @@ export async function generateCalendar(): Promise<string> {
                   (engDayCast[key] || key).slice(1) ||
                   key.charAt(0).toUpperCase() + key.slice(1);
                 let momentDay = moment(
-                  `${key}-${json.listed_week}-${json.actual_year}`,
+                  `${key}-${(json.listed_week || 0)+1}-${json.actual_year}`,
                   "dddd-ww-yyyy"
                 );
                 if (momentDay.isValid()) {
