@@ -6,7 +6,6 @@ import fsS from "fs";
 import { glob } from "glob";
 import path from "path";
 import {fileToDateString, getMenu} from "App/Common/HelperFunctions";
-import e from "express";
 
 export function errorCalendar() {
   const cal = ical({ domain: "eatery.nero2k.com", name: "Eatery Lunchmeny" });
