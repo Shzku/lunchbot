@@ -2,7 +2,6 @@ export const blockedWords: Array<string> = [
   "borgarfsjordsgatan",
   "borgarfsjordgatan",
   "kista",
-  "bröd",
   "eaterykortet",
   "trevlig",
   "tycker",
